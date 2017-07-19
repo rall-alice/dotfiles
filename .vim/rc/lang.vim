@@ -8,13 +8,6 @@ augroup php
 augroup END
 "}}}
 
-"perl設定 {{{
-augroup perl
-	autocmd!
-	"autocmd BufWrite *.pl,*.pm w !perl -l
-augroup END
-"}}}
-
 " fish設定 {{{
 augroup sh 
 "	autocmd BufRead *.fish set filetype=sh 
