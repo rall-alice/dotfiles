@@ -66,10 +66,6 @@ set shiftwidth=2
 set tabstop=2
 
 "分割ウィンドウ移動
-nnoremap   <C-k>    <C-W>k
-nnoremap   <C-j>  <C-W>j
-nnoremap   <C-l>  <C-W>l
-nnoremap   <C-h> <C-W>h
 nnoremap   <S-Up>    <C-W>k
 nnoremap   <S-Down>  <C-W>j
 nnoremap   <S-Left>  <C-W>h
@@ -80,10 +76,8 @@ nnoremap	tn :tabnew<CR>
 nnoremap	ts :tab split<CR>
 nnoremap	tc :tabclose<CR>
 nnoremap	tu :Unite tab<CR>
-nnoremap <silent><C-S-l> :tabnext<CR>
-nnoremap <silent><C-S-h> :tabprevious<CR>
-nnoremap <silent><C-S-RIGHT> :tabnext<CR>
-nnoremap <silent><C-S-LEFT> :tabprevious<CR>
+nnoremap <silent><C-l> :tabnext<CR>
+nnoremap <silent><C-h> :tabprevious<CR>
 
 "バッファ系
 nnoremap	Bu :Unite buffer<CR>
@@ -101,12 +95,6 @@ inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>
 inoremap <C-h> <LEFT>
 inoremap <C-l> <RIGHT>
-
-"検索系
-"nnoremap n nzz;
-"nnoremap N Nzz;
-"nnoremap * *zz;
-"nnoremap # #zz;
 
 "コピペ系
 nnoremap Y y$
@@ -136,7 +124,5 @@ autocmd QuickFixCmdPost *ag* cwindow
 
 nnoremap g<CR> g;
 inoremap jj <ESC>
-"nnoremap : q:a
-"nnoremap / q/a
 
 :source $VIMRUNTIME/macros/matchit.vim 
