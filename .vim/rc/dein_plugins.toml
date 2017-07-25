@@ -37,6 +37,9 @@ repo = "Shougo/unite-outline"
 repo = 'vim-scripts/surround.vim'
 
 [[plugins]]
+repo = 'Shougo/vimshell.vim'
+
+[[plugins]]
 repo = 'thinca/vim-ref'
 
 [[plugins]]
@@ -55,11 +58,29 @@ repo = 'hotchpotch/perldoc-vim'
 repo = 'vim-scripts/Align'
 
 [[plugins]]
-repo = 'itchyny/vim-cursorword'
+repo ='itchyny/vim-cursorword'
 
 [[plugins]]
-repo = 'mattn/emmet-vim'
+repo = 'pangloss/vim-javascript'
 
 [[plugins]]
-repo = 'scrooloose/syntastic'
+repo = 'maxmellon/vim-jsx-pretty'
+
+[[plugins]]
+repo = 'othree/yajs.vim'
+
+[[plugins]]
+repo = "osyo-manga/shabadou.vim"
+
+[[plugins]]
+repo = "osyo-manga/vim-watchdogs"
+
+[[plugins]]
+repo = "osyo-manga/unite-quickfix"
+
+[[plugins]]
+repo = 'cohama/vim-hier'
+
+[[plugins]]
+repo = 'dannyob/quickfixstatus'
 

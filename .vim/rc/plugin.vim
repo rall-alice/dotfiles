@@ -40,9 +40,11 @@ endif
 " }}}
 
 "Unite {{{
-nnoremap <silent> <space>ug :Unite grep -buffer-name=search-buffer -no-quit -winheight=10<CR>
-nnoremap <silent> <space>r  :<C-u>UniteResume search-buffer -no-quit -winheight=10<CR>
-nnoremap <silent> <space>o  :Unite outline<CR>
+nnoremap <silent><space>g :Unite grep -buffer-name=search-buffer -no-quit -winheight=10<CR>
+nnoremap <silent><space>r :<C-u>UniteResume search-buffer -no-quit -winheight=10<CR>
+nnoremap <silent><space>o :Unite outline<CR>
+nnoremap <silent><space>t :Unite tab<CR>
+nnoremap <silent><space>b :Unite buffer<CR>
 
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
@@ -52,9 +54,6 @@ if executable('ag')
 	let g:unite_source_grep_default_opts = '--nogroup --nocolor --hidden -S --ignore /.swp$/'
 	let g:unite_source_grep_recursive_opt = ''
 endif
-
-" deinの読み込み後にsyntaxが無効になるらしい
-syntax on
 
 " }}}
 
@@ -70,11 +69,6 @@ nnoremap <silent> <space>gl :Unite giti/log<CR>
 
 "{{{ NeoYank
 nnoremap <silent><space>y :Unite history/yank<CR>
-"}}}
-
-"quickrun{{{
-let g:quickrun_config = {'*': {'split' : 'vertical' , 'hook/time/enable': '1'},}
-let g:quickrun_config._ = {'runner' : 'vimproc'}
 "}}}
 
 " {{{	lightline
@@ -93,8 +87,8 @@ let g:lightline = {
 \ }
 " }}}
 
-:if version > 703
 " {{{ neocomplete
+:if version > 703
 
 "-------------------------
 " neocomplete
@@ -125,8 +119,8 @@ endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-" Recommended key-mappings.
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
+"" Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
@@ -138,11 +132,11 @@ endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><CR>  neocomplete#close_popup()
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+"inoremap <expr><C-y>  neocomplete#close_popup()
+"inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 " For cursor moving in insert mode(Not recommended)
@@ -177,16 +171,16 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 :endif
 
 " neosnippet {{{
-let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/'
+let g:neosnippet#snippets_directory='~/.cache/dein/repos/github.com/Shougo/neosnippet-snippets/snippets/'
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " <TAB>: completion.
 " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 "imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -204,20 +198,20 @@ endif
 " }}}
 
 " syntastic {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_perl_checkers=1
-
-let g:syntastic_php_checkers=['php','tpl']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_signs = 1
-let g:syntastic_echo_current_error = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_enable_highlighting = 1
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_enable_perl_checker = 1
+"
+"let g:syntastic_php_checkers=['php','tpl']
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_enable_signs = 1
+"let g:syntastic_echo_current_error = 1
+"let g:syntastic_auto_loc_list = 2
+"let g:syntastic_enable_highlighting = 1
 " }}}
 
 "ctrlp {{{
@@ -258,13 +252,48 @@ autocmd FileType ref-* nnoremap <buffer> <silent> q :<C-u>close<CR>
 "imap <C-e> <C-y>,
 "}}}
 
-" showmarks {{{
-"aug show-marks-sync
-"        au!
-"        au BufReadPost * sil! DoShowMarks
-"aug END 
+" watchdogs {{{
+
+let g:watchdogs_check_BufWritePost_enable = 1
+let g:watchdogs_check_CursorHold_enable = 1
+let g:watchdogs_check_BufWritePost_enable_on_wq = 0
+
+let g:quickrun_config = {
+\   "_" : {
+\     "hook/close_unite_quickfix/enable_hook_loaded" : 1,
+\     "hook/unite_quickfix/enable_failure" : 1,
+\     "hook/close_quickfix/enable_exit" : 1,
+\     "hook/close_buffer/enable_failure" : 1,
+\     "hook/close_buffer/enable_empty_data" : 1,
+\     "outputter" : "multi:buffer:quickfix",
+\     "outputter/buffer/split" : ":botright 8sp",
+\     'runner' : 'vimproc',
+\     "runner/vimproc/updatetime" : 40,
+\   },
+\
+\   "watchdogs_checker/_" : {
+\   },
+\   "javascript/watchdogs_checker" : {
+\     "type" : "eslint",
+\   },
+\   "perl/watchdogs_checker" : {
+\     "type" : "perl",
+\   }
+\ }
+"   "php/watchdogs_checker" : {
+"     "type" : "php",
+"     "outputter/quickfix/open_cmd" : '',
+"   },
+
+call watchdogs#setup(g:quickrun_config)
+
+" }}}
+
+" Surround {{{
+nnoremap <C-S> <Nop>
+nmap <C-S> ys
+nmap <C-S><C-S> ysiw'
 " }}}
 
 let g:netrw_liststyle=3
-
 

@@ -72,12 +72,10 @@ nnoremap   <S-Left>  <C-W>h
 nnoremap   <S-Right> <C-W>l
 
 "タブ関係
-nnoremap	tn :tabnew<CR>
-nnoremap	ts :tab split<CR>
-nnoremap	tc :tabclose<CR>
-nnoremap	tu :Unite tab<CR>
-nnoremap <silent><C-l> :tabnext<CR>
-nnoremap <silent><C-h> :tabprevious<CR>
+nnoremap	<silent> <C-n> :tabnew<CR>
+nnoremap	,s :tab split<CR>
+nnoremap	<silent> <C-l> :tabnext<CR>
+nnoremap	<silent> <C-h> :tabprevious<CR>
 
 "バッファ系
 nnoremap	Bu :Unite buffer<CR>
@@ -91,16 +89,29 @@ inoremap '' ''<C-g>U<LEFT>
 inoremap <> <><C-g>U<LEFT>
 
 "カーソル移動系
-inoremap <C-j> <DOWN>
-inoremap <C-k> <UP>
-inoremap <C-h> <LEFT>
-inoremap <C-l> <RIGHT>
+inoremap <C-j> <Nop>
+inoremap <C-k> <Nop>
+inoremap <C-h> <Nop>
+inoremap <C-l> <Nop>
+imap <C-j> <DOWN>
+imap <C-k> <UP>
+imap <C-h> <LEFT>
+imap <C-l> <RIGHT>
+
+inoremap <C-w> <Nop>
+inoremap <C-b> <Nop>
+imap <silent> <C-w> <C-o>w
+imap <silent> <C-b> <C-o>b
+
+inoremap <C-e> <Nop>
+inoremap <C-a> <Nop>
+imap <silent> <C-e> <End>
+imap <silent> <C-a> <Home>
 
 "コピペ系
 nnoremap Y y$
 
 "その他
-nnoremap <C-S-j> a<Return><Esc>
 nnoremap <silent><ESC><ESC>  :noh<CR>
 nnoremap <M-i>  :set paste<CR>i
 "ESC1回押した後にカーソルでおかしな挙動になるので矯正
