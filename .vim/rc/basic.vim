@@ -1,3 +1,4 @@
+colorscheme ron
 
 "必須設定
 set nocompatible
@@ -20,7 +21,7 @@ set list
 set listchars=tab:>-
 set ruler
 set nowrap
-set cursorline
+set cursorline 
 highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=8
 set background=dark
 set ttyfast
@@ -88,6 +89,13 @@ inoremap "" ""<C-g>U<LEFT>
 inoremap '' ''<C-g>U<LEFT>
 inoremap <> <><C-g>U<LEFT>
 
+inoremap {}; {};
+inoremap []; [];
+inoremap (); ();
+inoremap ""; "";
+inoremap ''; '';
+inoremap <>; <>;
+
 "カーソル移動系
 inoremap <C-j> <Nop>
 inoremap <C-k> <Nop>
@@ -133,6 +141,7 @@ autocmd InsertLeave * set nopaste
 autocmd QuickFixCmdPost *grep* cwindow
 autocmd QuickFixCmdPost *ag* cwindow
 
+nnoremap	<C-i> :set paste<CR>i
 nnoremap g<CR> g;
 inoremap jj <ESC>
 

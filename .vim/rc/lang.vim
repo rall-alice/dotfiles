@@ -2,9 +2,17 @@
 augroup php
 	autocmd!
 	autocmd BufRead,BufNewFile *.tpl set filetype=php
+	autocmd BufRead,BufNewFile *.php set tags+=~/yama96_git/php.tags
 	autocmd BufWrite *.php,*.tpl w !php -l
 	"    autocmd FileType php :set dictionary+=~/.vim/dict/php.dict
 	inoremap <?? <?php ; ?><LEFT><LEFT><LEFT><LEFT>
+augroup END
+"}}}
+
+"perl設定 {{{
+augroup perl
+	autocmd!
+	"autocmd BufWrite *.pl,*.pm w !perl -c
 augroup END
 "}}}
 

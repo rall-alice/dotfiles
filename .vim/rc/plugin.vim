@@ -1,10 +1,14 @@
 scriptencoding utf-8
 
+
 " dein {{{
 " プラグインが実際にインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
+
+let s:dein_root_dir = s:dein_dir . '/repos/github.com'
+
 " dein.vim 本体
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:dein_repo_dir = s:dein_root_dir . '/Shougo/dein.vim'
 
 " dein.vim がなければ github から落としてくる
 if &runtimepath !~# '/dein.vim'
@@ -39,12 +43,26 @@ if dein#check_install()
 endif
 " }}}
 
-"Unite {{{
-nnoremap <silent><space>g :Unite grep -buffer-name=search-buffer -no-quit -winheight=10<CR>
+" Plugin keymap {{{
+" Unite
+nnoremap <silent><space>G :Unite grep -buffer-name=search-buffer -no-quit -winheight=10<CR>
 nnoremap <silent><space>r :<C-u>UniteResume search-buffer -no-quit -winheight=10<CR>
 nnoremap <silent><space>o :Unite outline<CR>
 nnoremap <silent><space>t :Unite tab<CR>
 nnoremap <silent><space>b :Unite buffer<CR>
+" Unite Yank
+nnoremap <silent><space>y :Unite history/yank<CR>
+" Unite giti
+nnoremap <silent> <space>gs :Unite giti/status<CR>
+nnoremap <silent> <space>gb :Unite giti/branch<CR>
+nnoremap <silent> <space>gl :Unite giti/log<CR>
+" Surround
+nnoremap <C-S> <Nop>
+nmap <C-S> ys
+nmap <C-S><C-S> ysiw'
+" }}}
+
+" Unite {{{
 
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
@@ -57,21 +75,7 @@ endif
 
 " }}}
 
-" unite giti {{{
-nnoremap <silent> <space>gs :Unite giti/status<CR>
-nnoremap <silent> <space>gb :Unite giti/branch<CR>
-nnoremap <silent> <space>gl :Unite giti/log<CR>
-" }}}
-
-"NERDTree{{{
-"let NERDTreeShowHidden = 1
-"}}}
-
-"{{{ NeoYank
-nnoremap <silent><space>y :Unite history/yank<CR>
-"}}}
-
-" {{{	lightline
+" lightline {{{
 let g:lightline = {	
 	\ 'separator': { 'left': "\u2b80", 'right': "\u2b81" },
 	\ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
@@ -87,7 +91,7 @@ let g:lightline = {
 \ }
 " }}}
 
-" {{{ neocomplete
+" neocomplete {{{
 :if version > 703
 
 "-------------------------
@@ -117,45 +121,21 @@ if !exists('g:neocomplete#keyword_patterns')
 	let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-" Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
-"inoremap <expr><C-l>     neocomplete#complete_common_string()
-"" Recommended key-mappings.
-" <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+
 function! s:my_cr_function()
 	return neocomplete#close_popup() . "\<CR>"
-	" For no inserting <CR> key.
-	"return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
-" <TAB>: completion.
+
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><CR>  neocomplete#close_popup()
-"inoremap <expr><C-y>  neocomplete#close_popup()
-"inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-" For cursor moving in insert mode(Not recommended)
 inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
 inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
 inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
 inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-" AutoComplPop like behavior.
 let g:neocomplete#enable_auto_select = 0
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-" Enable omni completion.
 let g:neocomplete#text_mode_filetypes = get(g:, 'neocomplete#text_mode_filetypes', {})
 let g:neocomplete#text_mode_filetypes.php = 1
 let g:neocomplete#text_mode_filetypes.tpl = 1
@@ -163,33 +143,18 @@ let g:neocomplete#text_mode_filetypes.tpl = 1
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " }}}
 :endif
 
 " neosnippet {{{
-let g:neosnippet#snippets_directory='~/.cache/dein/repos/github.com/Shougo/neosnippet-snippets/snippets/'
+let g:neosnippet#snippets_directory = s:dein_root_dir . '/Shougo/neosnippet-snippets/snippets/'
 let g:neosnippet#enable_snipmate_compatibility = 1
 
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Plugin key-mappings.
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
-
 " SuperTab like snippets behavior.
-"imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-"imap <expr><CR> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<CR>"
 imap <expr><CR> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
@@ -214,12 +179,13 @@ endif
 "let g:syntastic_enable_highlighting = 1
 " }}}
 
-"ctrlp {{{
+" ctrlp {{{
+let g:ctrlp_follow_symlinks = 2
 let g:ctrlp_clear_cache_on_exit = 0 
 let g:ctrlp_mruf_max = 1500 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_height = 20
-let g:ctrlp_lazy_update = 180
+let g:ctrlp_lazy_update = 120
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_extensions = ['tag', 'funcky', 'quickfix', 'mixed']
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
@@ -255,8 +221,14 @@ autocmd FileType ref-* nnoremap <buffer> <silent> q :<C-u>close<CR>
 " watchdogs {{{
 
 let g:watchdogs_check_BufWritePost_enable = 1
-let g:watchdogs_check_CursorHold_enable = 1
+let g:watchdogs_check_CursorHold_enable = 0
 let g:watchdogs_check_BufWritePost_enable_on_wq = 0
+
+let g:watchdogs_check_BufWritePost_enables = {
+\   "php" : 0,
+\   "perl" : 0,
+\ }
+
 
 let g:quickrun_config = {
 \   "_" : {
@@ -273,11 +245,12 @@ let g:quickrun_config = {
 \
 \   "watchdogs_checker/_" : {
 \   },
+\
+\   "perl/watchdogs_checker" : {
+\   },
+\
 \   "javascript/watchdogs_checker" : {
 \     "type" : "eslint",
-\   },
-\   "perl/watchdogs_checker" : {
-\     "type" : "perl",
 \   }
 \ }
 "   "php/watchdogs_checker" : {
@@ -289,11 +262,7 @@ call watchdogs#setup(g:quickrun_config)
 
 " }}}
 
-" Surround {{{
-nnoremap <C-S> <Nop>
-nmap <C-S> ys
-nmap <C-S><C-S> ysiw'
-" }}}
-
 let g:netrw_liststyle=3
+
+colorscheme nefertiti
 

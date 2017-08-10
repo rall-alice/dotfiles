@@ -84,3 +84,30 @@ repo = 'cohama/vim-hier'
 [[plugins]]
 repo = 'dannyob/quickfixstatus'
 
+[[plugins]]
+repo = 'thinca/vim-localrc'
+
+[[plugins]]
+repo = 'gorodinskiy/vim-coloresque'
+
+[[plugins]]
+repo = 'ujihisa/unite-colorscheme'
+
+
+
+[[plugins]]
+repo = 'romainl/Apprentice'
+
+[[plugins]]
+repo = 'AlessandroYorba/Alduin'
+
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+
+[[plugins]]
+repo = 'freeo/vim-kalisi'
+
+[[plugins]]
+repo = 'jeetsukumaran/vim-nefertiti'
+
+

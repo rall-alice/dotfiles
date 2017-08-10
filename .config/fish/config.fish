@@ -1,19 +1,42 @@
-alias ef="vim ~/.config/fish/config.fish"
-alias evb="vim ~/.vim/vimrc/basic.vim"
-alias evp="vim ~/.vim/vimrc/plugin.vim"
-alias evl="vim ~/.vim/vimrc/lang.vim"
+function ef
+	vim ~/.config/fish/config.fish
+end
 
-alias ll="ls -l"
-alias his='history'
-alias less 'less -S -N'
+function evb 
+	vim ~/.vim/vimrc/basic.vim
+end
 
-alias tinypng=pngquant
-alias dns_cache_clear="sudo killall -HUP mDNSResponder"
+function evp
+	vim ~/.vim/vimrc/plugin.vim
+end
 
-export LESS=x2
-export SVN_EDITOR="vim"
-export HISTSIZE=10000
-export XDG_CONFIG_HOME="$HOME/.config"
+function evd
+	vim ~/.vim/vimrc/dein_plugins.toml
+end
+
+function evdl
+	vim ~/.vim/vimrc/dein_plugins_lazy.toml
+end
+
+function evl
+	vim ~/.vim/vimrc/lang.vim
+end
+
+function ehttpdconf
+	sudo vim /etc/httpd/conf/httpd.conf
+end
+
+function errlog 
+	sudo less -S /var/log/httpd/error_log
+end
+
+function fsw 
+	find . -name '.*.swp'
+end
+
+function calc
+	perl -e "print $argv"
+end
 
 function fg -d "advanced fg command"
 	if test (count $argv) -eq 0
@@ -34,6 +57,34 @@ function jj -d "advanced jobs command"
 	for j in (jobs | sort -n -k2 | awk '$1 ~ /[0-9]+/{print sprintf("[%d] %d %s %s", NR, $2, $5, $6)};') ; echo $j; end
 end
 
+
+alias lls "ls -altr"
+alias grephp "grep -Prin --color --include='*.php'"
+alias greptpl "grep -Prin --color --include='*.tpl'"
+alias sudo 'sudo -E '
+alias tinypng 'pngquant'
+alias his 'history'
+alias less 'less -S -N'
+alias yag "ag --hidden -G '\.(php|tpl)'"
+alias gplo "git pull origin"
+
+export SVN_EDITOR=nvim
+export BUSHO_ENV=dev
+export HISTCONTROL=ignoredups
+export HISTSIZE=10000
+export LESS=x2
+export LESSCHARSET=utf-8
+export XDG_CONFIG_HOME="$HOME/.config"
+
+source ~/perl5/perlbrew/etc/perlbrew.fish
+
+if status --is-login
+	if test $SSH_TTY
+		# fish_logo
+	end
+end
+
+
 function fish_user_key_bindings
 	for mode in insert default visual
 		bind -M $mode \ca beginning-of-line
@@ -50,6 +101,3 @@ function hybrid_bindings --description "Vi-style bindings that inherit emacs-sty
 end
 
 set -g fish_key_bindings hybrid_bindings
-
-source ~/perl5/perlbrew/etc/perlbrew.fish
-
