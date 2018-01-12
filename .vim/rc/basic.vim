@@ -13,7 +13,7 @@ set mouse=n
 
 set history=2000
 set autoindent
-"set iskeyword-=_
+set iskeyword+=_
 
 "表示系
 set number
@@ -96,6 +96,8 @@ inoremap ""; "";
 inoremap ''; '';
 inoremap <>; <>;
 
+inoremap (){} ()<SPACE>{}<LEFT>
+
 "カーソル移動系
 inoremap <C-j> <Nop>
 inoremap <C-k> <Nop>
@@ -121,13 +123,12 @@ nnoremap Y y$
 
 "その他
 nnoremap <silent><ESC><ESC>  :noh<CR>
-nnoremap <M-i>  :set paste<CR>i
+"nnoremap <M-i>  :set paste<CR>i
 "ESC1回押した後にカーソルでおかしな挙動になるので矯正
 nnoremap <silent><ESC><ESC>OA  <LEFT>
 nnoremap <silent><ESC><ESC>OB  <DOWN>
 nnoremap <silent><ESC><ESC>OC  <RIGHT>
 nnoremap <silent><ESC><ESC>OD  <UP>
-
 "gfと<C-w>gfを入れ替える
 nnoremap gf  <C-w>gF
 nnoremap gF  <C-w>gf
@@ -135,6 +136,15 @@ nnoremap <C-w>gf gF
 nnoremap <C-w>gF gf
 nnoremap J gJ
 nnoremap gJ J
+nnoremap <C-]> g]
+nnoremap g] <C-]>
+
+
+if exists(':tmap') ==# 2
+	" Terminal-Job モード用
+	tnoremap <C-n> <DOWN>
+	tnoremap <C-p> <UP>
+endif
 
 "便利設定
 autocmd InsertLeave * set nopaste

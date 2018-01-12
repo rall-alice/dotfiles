@@ -1,6 +1,5 @@
 scriptencoding utf-8
 
-
 " dein {{{
 " プラグインが実際にインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
@@ -131,6 +130,7 @@ endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 inoremap <expr><CR>  neocomplete#close_popup()
+inoremap <expr><C-f>  pumvisible() ? "\<C-n>" . neocomplete#close_popup() : neocomplete#close_popup()
 inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
 inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
 inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
@@ -213,56 +213,5 @@ let g:ref_phpmanual_path=$HOME . '/.vim/vim-ref/php-chunked-xhtml'
 autocmd FileType ref-* nnoremap <buffer> <silent> q :<C-u>close<CR>
 "}}}
 
-" Emmet{{{
-"let g:user_emmet_leader_key='<C-Z>'
-"imap <C-e> <C-y>,
-"}}}
-
-" watchdogs {{{
-
-let g:watchdogs_check_BufWritePost_enable = 1
-let g:watchdogs_check_CursorHold_enable = 0
-let g:watchdogs_check_BufWritePost_enable_on_wq = 0
-
-let g:watchdogs_check_BufWritePost_enables = {
-\   "php" : 0,
-\   "perl" : 0,
-\ }
-
-
-let g:quickrun_config = {
-\   "_" : {
-\     "hook/close_unite_quickfix/enable_hook_loaded" : 1,
-\     "hook/unite_quickfix/enable_failure" : 1,
-\     "hook/close_quickfix/enable_exit" : 1,
-\     "hook/close_buffer/enable_failure" : 1,
-\     "hook/close_buffer/enable_empty_data" : 1,
-\     "outputter" : "multi:buffer:quickfix",
-\     "outputter/buffer/split" : ":botright 8sp",
-\     'runner' : 'vimproc',
-\     "runner/vimproc/updatetime" : 40,
-\   },
-\
-\   "watchdogs_checker/_" : {
-\   },
-\
-\   "perl/watchdogs_checker" : {
-\   },
-\
-\   "javascript/watchdogs_checker" : {
-\     "type" : "eslint",
-\   }
-\ }
-"   "php/watchdogs_checker" : {
-"     "type" : "php",
-"     "outputter/quickfix/open_cmd" : '',
-"   },
-
-call watchdogs#setup(g:quickrun_config)
-
-" }}}
-
 let g:netrw_liststyle=3
-
-colorscheme nefertiti
 

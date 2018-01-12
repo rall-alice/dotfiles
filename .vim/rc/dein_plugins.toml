@@ -70,12 +70,6 @@ repo = 'maxmellon/vim-jsx-pretty'
 repo = 'othree/yajs.vim'
 
 [[plugins]]
-repo = "osyo-manga/shabadou.vim"
-
-[[plugins]]
-repo = "osyo-manga/vim-watchdogs"
-
-[[plugins]]
 repo = "osyo-manga/unite-quickfix"
 
 [[plugins]]
@@ -88,26 +82,5 @@ repo = 'dannyob/quickfixstatus'
 repo = 'thinca/vim-localrc'
 
 [[plugins]]
-repo = 'gorodinskiy/vim-coloresque'
-
-[[plugins]]
 repo = 'ujihisa/unite-colorscheme'
-
-
-
-[[plugins]]
-repo = 'romainl/Apprentice'
-
-[[plugins]]
-repo = 'AlessandroYorba/Alduin'
-
-[[plugins]]
-repo = 'jacoborus/tender.vim'
-
-[[plugins]]
-repo = 'freeo/vim-kalisi'
-
-[[plugins]]
-repo = 'jeetsukumaran/vim-nefertiti'
-
 
