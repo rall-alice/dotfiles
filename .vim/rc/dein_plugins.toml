@@ -84,3 +84,5 @@ repo = 'thinca/vim-localrc'
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
 
+[[plugins]]
+repo = 'elixir-editors/vim-elixir'

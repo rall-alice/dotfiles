@@ -6,6 +6,7 @@ augroup php
 	autocmd BufWrite *.php,*.tpl w !php -l
 	"    autocmd FileType php :set dictionary+=~/.vim/dict/php.dict
 	inoremap <?? <?php ; ?><LEFT><LEFT><LEFT><LEFT>
+	set noexpandtab
 augroup END
 "}}}
 
@@ -13,6 +14,7 @@ augroup END
 augroup perl
 	autocmd!
 	"autocmd BufWrite *.pl,*.pm w !perl -c
+	set noexpandtab
 augroup END
 "}}}
 
@@ -24,5 +26,12 @@ augroup END " }}}
 " HTML設定 {{{
 augroup html 
 	autocmd BufRead *.tsv set filetype=html 
+	set noexpandtab
+augroup END " }}}
+
+" HTML設定 {{{
+augroup elixir 
+	autocmd!
+	set expandtab
 augroup END " }}}
 
